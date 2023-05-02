@@ -15,3 +15,18 @@ def Index(request):
     context['Totos'] = Totos
     
     return render(request, 'index.html', context)
+
+
+def UpdateTask(request, id):
+    edit_task = TodoList.objects.get(id=id)
+    if edit_task.status == True:
+        edit_task.status = False
+    elif edit_task.status == False:
+        edit_task.status = True
+    edit_task.save()
+    return redirect('Index')
+
+def DeleteTask(request, id):
+    edit_task = TodoList.objects.get(id=id)
+    edit_task.delete()
+    return redirect('Index')
